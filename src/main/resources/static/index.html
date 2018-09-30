@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr" ng-app="fizzBuzzApp">
+  <head>
+    <!--General-->
+    <meta charset="utf-8">
+    <meta name="author" content="Aleix Riba">
+    <meta name="description" content="FizzBuzz game generating a number and giving the result in a file">
+    <meta name="keywords" content="Fizz,Buzz,FizzBuzz,Game,Concatel">
+
+    <title>FizzBuzz Game</title>
+
+    <!--Style-->
+    <link rel="stylesheet" href="./vendor/bootstrap-4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <!--Script-->
+    <script src="./vendor/jquery-3.3.1/jquery-3.3.1.min.js" charset="utf-8"></script>
+    <script src="./vendor/bootstrap-4.1.3/js/bootstrap.bundle.min.js" charset="utf-8"></script>
+    <script src="./vendor/angular-1.7.4/angular.min.js" charset="utf-8"></script>
+
+    <!--My Script-->
+    <script src="./js/App.js" charset="utf-8"></script>
+    <script src="./js/service/GameService.js" charset="utf-8"></script>
+    <script src="./js/controller/GameController.js" charset="utf-8"></script>
+
+  </head>
+  <body ng-controller="gameController" ng-init="getMaxNumber()">
+
+    <div class="jumbotron">
+      <h1 class="display-4">FizzBuzz Game</h1>
+      <p class="lead">The game is simple, a random number is generated and you have to go from the random number generated to the maximum number (100) and the numbers that are divisible by 3 put Fizz and those that are divisible by 5 put Buzz and if it is divisible by both put FizzBuzz.</p>
+      <hr class="my-4">
+      <p>Press the 'Generate' button to generate the random number and start the game.</p>
+      <button class="btn btn-primary btn-lg" href="#" role="button" ng-if="numRandom==null" ng-click="generateNumber()">Generate</button>
+      <div ng-if="numRandom!=null">
+        <div class="alert alert-primary" role="alert">
+          The generated number is: <span class="font-weight-bold">{{numRandom}}</span>
+        </div>
+        <button class="btn btn-warning btn-lg" href="#" role="button" ng-click="generateNumber()">Regenerate</button>
+        <button class="btn btn-success btn-lg" href="#" role="button" ng-click="startGame()">Start Game</button>
+      </div>
+    </div>
+
+  </body>
+</html>
