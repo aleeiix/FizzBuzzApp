@@ -1,3 +1,9 @@
+/**
+ * Java class that we use to write to a file
+ * @author Aleix Riba
+ * @version 1.0.0
+ */
+
 package com.exercice.FizzBuzzApp.helper;
 
 import java.io.BufferedWriter;
@@ -15,6 +21,10 @@ public class WriteFile {
 	
 	public WriteFile(){}
 	
+	/**
+	 * write the line received by parameter in a file
+	 * @param line, line that will be written to the file
+	 */
 	public void write(String line) {
 		try {
 			File file = generateFile();
@@ -28,6 +38,10 @@ public class WriteFile {
 		}
     }
 
+	/**
+	 * generate a file in src/main/resources/files name today's date with the generated time
+	 * @return File
+	 */
 	private File generateFile() {
 		File resourcesDirectory = new File("src/main/resources/files/");
 		String route = resourcesDirectory.getAbsolutePath();

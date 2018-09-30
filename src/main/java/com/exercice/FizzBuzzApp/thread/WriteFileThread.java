@@ -1,3 +1,9 @@
+/**
+ * Class java that extends from Thread, to create the thread and start the game
+ * @author Aleix Riba
+ * @version 1.0.0
+ */
+
 package com.exercice.FizzBuzzApp.thread;
 
 import com.exercice.FizzBuzzApp.helper.WriteFile;
@@ -13,6 +19,9 @@ public class WriteFileThread extends Thread {
 		this.numberEnd = numberEnd;
 	}
 	
+	/**
+	 * function performed by the thread that is to create the line that we will write in the file
+	 */
 	public void run() {
 		StringBuilder line = new StringBuilder();
 		
