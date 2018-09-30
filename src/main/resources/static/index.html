@@ -25,13 +25,16 @@
 
   </head>
   <body ng-controller="gameController" ng-init="getMaxNumber()">
-
+    
+    <!--parent block that contains everything-->
     <div class="jumbotron">
       <h1 class="display-4">FizzBuzz Game</h1>
       <p class="lead">The game is simple, a random number is generated and you have to go from the random number generated to the maximum number (100) and the numbers that are divisible by 3 put Fizz and those that are divisible by 5 put Buzz and if it is divisible by both put FizzBuzz.</p>
       <hr class="my-4">
       <p>Press the 'Generate' button to generate the random number and start the game.</p>
       <button class="btn btn-primary btn-lg" href="#" role="button" ng-if="numRandom==null" ng-click="generateNumber()">Generate</button>
+
+      <!--block that shows the random number-->
       <div ng-if="numRandom!=null">
         <div class="alert alert-primary" role="alert">
           The generated number is: <span class="font-weight-bold">{{numRandom}}</span>
@@ -40,6 +43,7 @@
         <button class="btn btn-warning btn-lg" href="#" role="button" ng-click="generateNumber()">Regenerate</button>
         <button class="btn btn-success btn-lg" href="#" role="button" ng-click="startGame()">Start Game</button>
 
+        <!--block that warns that the game has finished successfully-->
         <div class="alert alert-success" role="alert" ng-if="finishGame">
           The game generated the file correctly
         </div>
