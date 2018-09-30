@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -29,12 +31,18 @@ public class WriteFile {
 		try {
 			File file = generateFile();
 			
-			BufferedWriter bw;
-			bw = new BufferedWriter(new FileWriter(file));
-			bw.write(line);
-			bw.close();
+			if (file != null) {
+				BufferedWriter bw;
+				bw = new BufferedWriter(new FileWriter(file));
+				bw.write(line);
+				bw.close();
+			} else {
+				Logger.getLogger(getClass().getName()).log(
+			            Level.WARNING, "Error file to arrived null");
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			Logger.getLogger(getClass().getName()).log(
+		            Level.WARNING, "Error when writing to the file");
 		}
     }
 
@@ -43,12 +51,19 @@ public class WriteFile {
 	 * @return File
 	 */
 	private File generateFile() {
-		File resourcesDirectory = new File("src/main/resources/files/");
-		String route = resourcesDirectory.getAbsolutePath();
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmssn");
-		LocalDateTime now = LocalDateTime.now(); 
-		String nameFile = dtf.format(now);
-		File file = new File(route+"/"+nameFile+".txt");
+		File file = null;
+		try {
+			File resourcesDirectory = new File("src/main/resources/files/");
+			String route = resourcesDirectory.getAbsolutePath();
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmssn");
+			LocalDateTime now = LocalDateTime.now(); 
+			String nameFile = dtf.format(now);
+			file = new File(route+"/"+nameFile+".txt");
+		} catch (Exception e) {
+			file = null;
+			Logger.getLogger(getClass().getName()).log(
+		            Level.WARNING, "Error when creating file");
+		}
 		
 		return file;
 	}

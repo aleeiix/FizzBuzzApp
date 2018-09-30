@@ -25,11 +25,15 @@
     * @return = none
     */
     $scope.getMaxNumber = function(){
-      gameService.getMaxNumber().then(function success(response) {
-        $scope.maxNum = response.data;
-      }, function error(response) {
-        console.log("Error in GameController -> getMaxNumber()");
-      });
+      try {
+        gameService.getMaxNumber().then(function success(response) {
+          $scope.maxNum = response.data;
+        }, function error(response) {
+          console.log("Error in GameController -> getMaxNumber()");
+        });
+      } catch (e) {
+        console.log("Error in GameController -> getMaxNumber() ->trycatch");
+      }
     }
 
     /**
@@ -42,8 +46,12 @@
     * @return = none
     */
     $scope.generateNumber = function(){
-      $scope.numRandom = Math.floor(Math.random() * ($scope.maxNum - $scope.minNum + 1)) + $scope.minNum;
-      $scope.finishGame = false;
+      try {
+        $scope.numRandom = Math.floor(Math.random() * ($scope.maxNum - $scope.minNum + 1)) + $scope.minNum;
+        $scope.finishGame = false;
+      } catch (e) {
+        console.log("Error in GameController -> generateNumber() ->trycatch");
+      }
     }
 
     /**
@@ -56,21 +64,25 @@
     * @return = none
     */
     $scope.startGame = function(){
-      if ($scope.numRandom != null) {
-        gameService.startGame($scope.numRandom).then(function success(response) {
-          if (response.data) {
-            $scope.finishGame = true;
-          } else {
+      try {
+        if ($scope.numRandom != null) {
+          gameService.startGame($scope.numRandom).then(function success(response) {
+            if (response.data) {
+              $scope.finishGame = true;
+            } else {
+              $scope.finishGame = false;
+              console.log("Error in GameController -> startGame() return false");
+            }
+          }, function error(response) {
             $scope.finishGame = false;
-            console.log("Error in GameController -> startGame() return false");
-          }
-        }, function error(response) {
+            console.log("Error in GameController -> startGame()");
+          });
+        } else {
           $scope.finishGame = false;
-          console.log("Error in GameController -> startGame()");
-        });
-      } else {
-        $scope.finishGame = false;
-        console.log("Error numRandom is null");
+          console.log("Error numRandom is null");
+        }
+      } catch (e) {
+        console.log("Error in GameController -> startGame() -> trycatch");
       }
     }
 
