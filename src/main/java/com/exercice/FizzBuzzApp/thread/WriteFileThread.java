@@ -29,9 +29,9 @@ public class WriteFileThread extends Thread {
 			}
 			line.append(", ");
 		}
+		
 		WriteFile writeFile = new WriteFile();
 		writeFile.write(line.substring(0, (line.length()-2)).toString());
-		System.out.println(line.substring(0, (line.length()-2)).toString());
 	}
 	
 }

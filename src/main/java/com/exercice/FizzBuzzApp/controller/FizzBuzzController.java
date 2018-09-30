@@ -1,9 +1,8 @@
 package com.exercice.FizzBuzzApp.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,24 +21,27 @@ public class FizzBuzzController {
 	}
 	
 	@PostMapping("/start")
-	Integer startGame(@RequestBody Integer numRandom) {
+	Boolean startGame(@RequestBody Integer numRandom) {
+		Boolean flag = true;
 		try {
-			Thread process = new WriteFileThread("processWriteFile",2,numberEnd);
+			Thread process = new WriteFileThread("processWriteFile",numRandom,numberEnd);
 			process.start();
 		} catch (Exception e) {
-			System.out.println("Error");
+			flag = false;
 		}
-		return 0;
+		return flag;
 	}
 	
-	@GetMapping("/start")
-	Integer startGame() {
+	//TEST
+	@GetMapping("/start/{numRandom}")
+	Boolean startGameTest(@PathVariable Integer numRandom) {
+		Boolean flag = true;
 		try {
-			Thread process = new WriteFileThread("processWriteFile",2,numberEnd);
+			Thread process = new WriteFileThread("processWriteFile",numRandom,numberEnd);
 			process.start();
 		} catch (Exception e) {
-			System.out.println("Error");
+			flag = false;
 		}
-		return 0;
+		return flag;
 	}
 }

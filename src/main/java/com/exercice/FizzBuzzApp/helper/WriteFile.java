@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -15,22 +17,25 @@ public class WriteFile {
 	
 	public void write(String line) {
 		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			File file = new File(classLoader.getResource("files").getFile());
-//			URL url = this.getClass().getClassLoader().getResource("files");
-//			String route = url.getPath()+"/archivo.txt";
-//			File archivo = new File(route);
-//			BufferedWriter bw;
-//			if(archivo.exists()) {
-//				bw = new BufferedWriter(new FileWriter(archivo));
-//				bw.write("El fichero de texto ya estaba creado.");
-//			} else {
-//				bw = new BufferedWriter(new FileWriter(archivo));
-//				bw.write("Acabo de crear el fichero de texto.");
-//			}
-//			bw.close();
+			File file = generateFile();
+			
+			BufferedWriter bw;
+			bw = new BufferedWriter(new FileWriter(file));
+			bw.write(line);
+			bw.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
     }
+
+	private File generateFile() {
+		File resourcesDirectory = new File("src/main/resources/files/");
+		String route = resourcesDirectory.getAbsolutePath();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmssn");
+		LocalDateTime now = LocalDateTime.now(); 
+		String nameFile = dtf.format(now);
+		File file = new File(route+"/"+nameFile+".txt");
+		
+		return file;
+	}
 }

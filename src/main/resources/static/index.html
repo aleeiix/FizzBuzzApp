@@ -36,8 +36,14 @@
         <div class="alert alert-primary" role="alert">
           The generated number is: <span class="font-weight-bold">{{numRandom}}</span>
         </div>
+
         <button class="btn btn-warning btn-lg" href="#" role="button" ng-click="generateNumber()">Regenerate</button>
         <button class="btn btn-success btn-lg" href="#" role="button" ng-click="startGame()">Start Game</button>
+
+        <div class="alert alert-success" role="alert" ng-if="finishGame">
+          The game generated the file correctly
+        </div>
+
       </div>
     </div>
 

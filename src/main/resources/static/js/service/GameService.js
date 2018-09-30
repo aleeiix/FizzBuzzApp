@@ -16,5 +16,5 @@
       });
     }
 
-  }]); //ends controller code
+  }]); //ends service code
 })(); //ends angular code here
