@@ -3,6 +3,7 @@ App which generates a random number, and from that number a text file is created
 
 ## Getting Started
 Project realized with Java framework Spring Boot and with AngularJS
+Result files are generated in FizzBuzzApp/src/main/resources/files
 
 ## Author
 Aleix Riba
