@@ -4,22 +4,23 @@
  * @version 1.0.0
  */
 
-package com.exercice.FizzBuzzApp.helper;
+package com.exercice.FizzBuzzApp.utilities;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 public class WriteFile {
+	
+	private final String WARNING_FILE_NULL = "Error file to arrived null";
+	private final String WARNING_WRITING = "Error when writing to the file";
+	private final String WARNING_CREATE_FILE = "Error when creating file";
 	
 	public WriteFile(){}
 	
@@ -38,11 +39,11 @@ public class WriteFile {
 				bw.close();
 			} else {
 				Logger.getLogger(getClass().getName()).log(
-			            Level.WARNING, "Error file to arrived null");
+			            Level.WARNING, WARNING_FILE_NULL);
 			}
 		} catch (Exception e) {
 			Logger.getLogger(getClass().getName()).log(
-		            Level.WARNING, "Error when writing to the file");
+		            Level.WARNING, WARNING_WRITING);
 		}
     }
 
@@ -54,6 +55,7 @@ public class WriteFile {
 		File file = null;
 		try {
 			File resourcesDirectory = new File("src/main/resources/files/");
+//			File resourcesDirectory = new File("target/classes/static/files/");
 			String route = resourcesDirectory.getAbsolutePath();
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmssn");
 			LocalDateTime now = LocalDateTime.now(); 
@@ -62,7 +64,7 @@ public class WriteFile {
 		} catch (Exception e) {
 			file = null;
 			Logger.getLogger(getClass().getName()).log(
-		            Level.WARNING, "Error when creating file");
+		            Level.WARNING, WARNING_CREATE_FILE);
 		}
 		
 		return file;

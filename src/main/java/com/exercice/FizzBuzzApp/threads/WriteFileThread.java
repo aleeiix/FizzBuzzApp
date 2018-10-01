@@ -4,14 +4,16 @@
  * @version 1.0.0
  */
 
-package com.exercice.FizzBuzzApp.thread;
+package com.exercice.FizzBuzzApp.threads;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.exercice.FizzBuzzApp.helper.WriteFile;
+import com.exercice.FizzBuzzApp.utilities.WriteFile;
 
 public class WriteFileThread extends Thread {
+	
+	private final String WARNING_START = "Error when starting the game from the thread";
 	
     private Integer numberEnd;
 	private Integer numberStart;
@@ -47,7 +49,7 @@ public class WriteFileThread extends Thread {
 			writeFile.write(line.substring(0, (line.length()-2)).toString());
 		} catch (Exception e) {
 			Logger.getLogger(getClass().getName()).log(
-		            Level.WARNING, "Error when starting the game from the thread");
+		            Level.WARNING, WARNING_START);
 		}
 	}
 	
