@@ -55,7 +55,7 @@ public class WriteFile {
 		File file = null;
 		try {
 			File resourcesDirectory = new File("src/main/resources/files/");
-//			File resourcesDirectory = new File("target/classes/static/files/");
+//			File resourcesDirectory = new File("target/classes/files/");
 			String route = resourcesDirectory.getAbsolutePath();
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmssn");
 			LocalDateTime now = LocalDateTime.now(); 
